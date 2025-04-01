@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
-        android:theme="@style/Theme.LanguagerTheme" >
+        android:theme="@style/AppTheme" >
 
         <meta-data
             android:name="xposedmodule"
@@ -39,6 +39,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".LanguageSelectionActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
 
         <!--Guide at: https://infinum.com/the-capsized-eight/share-files-using-fileprovider-->
         <provider

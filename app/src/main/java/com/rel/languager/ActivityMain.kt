@@ -1,5 +1,7 @@
 package com.rel.languager
 
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Build
@@ -16,7 +18,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.button.MaterialButton
+import android.widget.Button
 import com.google.android.material.snackbar.Snackbar
 import com.rel.languager.Constants.PREF_APP_LANGUAGE_MAP
 import com.rel.languager.Constants.SHARED_PREF_FILE_NAME
@@ -39,7 +41,7 @@ class ActivityMain : AppCompatActivity() {
     private lateinit var searchView: SearchView
     private lateinit var loadingProgress: ProgressBar
     private lateinit var noAppsText: TextView
-    private lateinit var saveButton: MaterialButton
+    private lateinit var saveButton: Button
     private val enabledApps = mutableListOf<ApplicationInfo>()
     private val languageMappings = mutableMapOf<String, String>()
     private val mainScope = CoroutineScope(Dispatchers.Main)
@@ -208,8 +210,7 @@ class ActivityMain : AppCompatActivity() {
                     val adapter = AppLanguageAdapter(
                         this@ActivityMain,
                         enabledApps,
-                        languageMappings,
-                        LanguageUtils.getAvailableLanguages()
+                        languageMappings
                     ) { packageName, languageCode ->
                         languageMappings[packageName] = languageCode
                         hasUnsavedChanges = true
@@ -255,5 +256,23 @@ class ActivityMain : AppCompatActivity() {
         }
 
         adapter.updateList(filteredApps)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        
+        if (requestCode == AppLanguageAdapter.REQUEST_LANGUAGE_SELECTION && resultCode == Activity.RESULT_OK) {
+            data?.getStringExtra(LanguageSelectionActivity.RESULT_LANGUAGE_CODE)?.let { languageCode ->
+                // Get the package name from the data
+                val packageName = data.getStringExtra(LanguageSelectionActivity.EXTRA_PACKAGE_NAME) ?: return@let
+                
+                // Update the language mapping
+                languageMappings[packageName] = languageCode
+                hasUnsavedChanges = true
+                
+                // Refresh the adapter to show the updated language
+                (appListRecyclerView.adapter as? AppLanguageAdapter)?.notifyDataSetChanged()
+            }
+        }
     }
 }

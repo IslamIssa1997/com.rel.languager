@@ -9,4 +9,15 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="red">#C62828</color>
+    
+    <!-- Dark theme colors -->
+    <color name="colorPrimary">#1E88E5</color>
+    <color name="colorPrimaryDark">#0D47A1</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimaryText">#FFFFFF</color>
+    <color name="colorSecondaryText">#B0BEC5</color>
+    <color name="colorCardBackground">#2C2C2C</color>
+    <color name="colorBackground">#121212</color>
+    <color name="colorBorder">#424242</color>
+    <color name="colorSearchBackground">#1565C0</color>
 </resources>

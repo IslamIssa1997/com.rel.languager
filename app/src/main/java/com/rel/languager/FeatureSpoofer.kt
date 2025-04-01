@@ -49,7 +49,8 @@ class FeatureSpoofer: IXposedHookLoadPackage {
                 return
             }
 
-            hookLocaleAPIs(lpparam, Locale(languageCode))
+            // Use Locale.forLanguageTag for long language codes
+            hookLocaleAPIs(lpparam, Locale.forLanguageTag(languageCode))
         }
     }
 

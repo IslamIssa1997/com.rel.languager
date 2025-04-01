@@ -24,9 +24,15 @@ object LanguageUtils {
     fun getAvailableLanguages(): List<Locale> {
         val localeList = Locale.getAvailableLocales().toMutableList()
 
-        localeList.sortBy { it.getDisplayLanguage(Locale.getDefault()) }
-        localeList.add(0, Locale.getDefault())
+        // Filter out locales with empty language tags and sort by display name
+        val filteredList = localeList.filter { it.toLanguageTag().isNotEmpty() && it.toLanguageTag() != "und" }
+        val sortedList = filteredList.sortedBy { it.getDisplayName(Locale.getDefault()) }
+        
+        // Add default locale at the beginning
+        val resultList = mutableListOf<Locale>()
+        resultList.add(Locale.getDefault())
+        resultList.addAll(sortedList)
 
-        return localeList.distinct().toMutableList()
+        return resultList.distinct().toMutableList()
     }
 }

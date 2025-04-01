@@ -11,8 +11,10 @@
     <string name="error_saving_settings">Error saving settings</string>
     <string name="error_loading_apps">Error loading applications. Please try again.</string>
     <string name="app_icon">App icon</string>
-    <string name="select_language">Select language</string>
+    <string name="select_language">Select Language</string>
     <string name="default_language">Default</string>
+    <string name="system_default">System Default</string>
+    <string name="search_languages">Search languages…</string>
     <string name="unsaved_changes_title">Unsaved Changes</string>
     <string name="unsaved_changes_message">You have unsaved changes. What would you like to do?</string>
     <string name="save_and_exit">Save and Exit</string>
