@@ -27,7 +27,7 @@ object LanguageUtils {
         // Filter out locales with empty language tags and sort by display name
         val filteredList = localeList.filter { it.toLanguageTag().isNotEmpty() && it.toLanguageTag() != "und" }
         val sortedList = filteredList.sortedBy { it.getDisplayName(Locale.getDefault()) }
-        
+
         // Add default locale at the beginning
         val resultList = mutableListOf<Locale>()
         resultList.add(Locale.getDefault())

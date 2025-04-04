@@ -19,7 +19,6 @@ class AppLanguageAdapter(
     private val languageMappings: MutableMap<String, String>,
     private val onLanguageSelected: (String, String) -> Unit
 ) : RecyclerView.Adapter<AppLanguageAdapter.ViewHolder>() {
-
     companion object {
         const val REQUEST_LANGUAGE_SELECTION = 1001
     }
@@ -46,7 +45,7 @@ class AppLanguageAdapter(
 
         // Get the current language for this app
         val currentLanguageCode = languageMappings[app.packageName] ?: Constants.DEFAULT_LANGUAGE
-        
+
         // Set the language display text
         if (currentLanguageCode == Constants.DEFAULT_LANGUAGE) {
             holder.languageText.text = context.getString(R.string.system_default)
@@ -75,6 +74,4 @@ class AppLanguageAdapter(
         appList = newList
         notifyDataSetChanged()
     }
-
-
 }

@@ -30,7 +30,7 @@ class LanguageSelectionAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val locale = languages[position]
         val languageTag = locale.toLanguageTag()
-        
+
         // For system default language
         if (position == 0 && languageTag == Locale.getDefault().toLanguageTag()) {
             holder.languageName.text = context.getString(R.string.system_default)

@@ -260,16 +260,16 @@ class ActivityMain : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        
+
         if (requestCode == AppLanguageAdapter.REQUEST_LANGUAGE_SELECTION && resultCode == Activity.RESULT_OK) {
             data?.getStringExtra(LanguageSelectionActivity.RESULT_LANGUAGE_CODE)?.let { languageCode ->
                 // Get the package name from the data
                 val packageName = data.getStringExtra(LanguageSelectionActivity.EXTRA_PACKAGE_NAME) ?: return@let
-                
+
                 // Update the language mapping
                 languageMappings[packageName] = languageCode
                 hasUnsavedChanges = true
-                
+
                 // Refresh the adapter to show the updated language
                 (appListRecyclerView.adapter as? AppLanguageAdapter)?.notifyDataSetChanged()
             }

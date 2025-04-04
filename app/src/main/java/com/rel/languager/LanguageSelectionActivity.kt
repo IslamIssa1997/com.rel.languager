@@ -66,7 +66,7 @@ class LanguageSelectionActivity : AppCompatActivity() {
 
         // Get all available languages
         allLanguages = LanguageUtils.getAvailableLanguages()
-        
+
         // Setup RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = LanguageSelectionAdapter(
@@ -81,7 +81,7 @@ class LanguageSelectionActivity : AppCompatActivity() {
             finish()
         }
         recyclerView.adapter = adapter
-        
+
         // Setup search functionality
         setupSearchFunctionality()
     }
@@ -93,35 +93,33 @@ class LanguageSelectionActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-    
+
     private fun setupSearchFunctionality() {
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            
+
             override fun afterTextChanged(s: Editable?) {
                 filterLanguages(s?.toString())
             }
         })
     }
-    
+
     private fun filterLanguages(query: String?) {
         val adapter = recyclerView.adapter as? LanguageSelectionAdapter ?: return
-        
+
         if (query.isNullOrBlank()) {
             adapter.updateLanguages(allLanguages)
             return
         }
-        
+
         val searchQuery = query.lowercase()
         val filteredLanguages = allLanguages.filter { locale ->
-            locale.displayName.lowercase().contains(searchQuery) || 
+            locale.displayName.lowercase().contains(searchQuery) ||
             locale.toLanguageTag().lowercase().contains(searchQuery)
         }
-        
+
         adapter.updateLanguages(filteredLanguages)
     }
-    
-
 }
