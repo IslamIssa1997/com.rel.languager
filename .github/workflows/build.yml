@@ -26,11 +26,20 @@ jobs:
       - name: Build APK
         run: bash ./gradlew assembleRelease
 
+      - name: Build APK
+        run: bash ./gradlew bundleRelease
+
       - name: Sign apk
         run: signapp -a app/build/outputs/apk/release/app-release-unsigned.apk -o app-release.apk
 
-      - name: Upload APK
+      - name: Upload apk
         uses: actions/upload-artifact@v4
         with:
           name: languager-apk
           path: app-release.apk
+
+      - name: Upload aab
+        uses: actions/upload-artifact@v4
+        with:
+          name: languager-aab
+          path: app/build/outputs/bundle/release/app-release.aab
